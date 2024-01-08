@@ -132,14 +132,14 @@ In particular, the analysis of aberrations with deep learning for 3D microscopy 
 \subsection{Description of the optical system}\label{sec:descriptionsystem}
 
 The optical configuration studied here consists in a single x-ray lens illuminated by a monochromatic x-ray beam emitted by an undulator in the EBS-ESRF storage ring. It is a simplified part of the future EBSL1 beamline.
-The x-ray source is a U18 undulator (period $\lambda_u=\SI{18}{\milli\meter}$) with $N_u=138$ periods placed in the center of a straight section of the EBS sotorage-ring\footnote{We used the electron beam sizes and divergences $\sigma_x=\SI{29.7}{\micro\meter}$,
+The x-ray source is a U18 undulator (period $\lambda_u=\SI{18}{\milli\meter}$) with $N_u=138$ periods placed in the center of a straight section of the EBS storage-ring\footnote{We used the electron beam sizes and divergences $\sigma_x=\SI{29.7}{\micro\meter}$,
 $\sigma_{x'}=\SI{4.37}{\micro\radian}$,
 $\sigma_y=\SI{5.29}{\micro\meter}$,
 $\sigma_{y'}=\SI{1.89}{\micro\radian}$, corresponding to beam emittances:  $\varepsilon_x=\SI{130}{\pico\meter \radian}$,
 $\varepsilon_y=\SI{10}{\pico\meter \radian}$, and beta functions
 $\beta_x=\SI{6.8}{\meter}$,
 $\beta_y=\SI{2.8}{\meter}$.
-}. The gap is tuned to have the first harmonic at $E=7$~keV (deflecting parameter $K=1.851$). We consider a Be real lens with parabolic profile and overlapping error profile (described latter). The lens radius at the appex $R=\SI{50}{\micro\meter}$ ($f=\SI{3.952}{\meter}$ at 7~keV), 
+}. The gap is tuned to have the first harmonic at $E=7$~keV (deflecting parameter $K=1.851$). We consider a Be real lens with parabolic profile and overlapping error profile (described later). The lens radius at the appex $R=\SI{50}{\micro\meter}$ ($f=\SI{3.952}{\meter}$ at 7~keV), 
  and the aperture (diameter) is $a=\SI{1.5}{\milli\meter}$. The lens is located at a distance $p=\SI{65}{\meter}$ from the source. Observation screens are placed in the vicinity of the geometrical focus, at an approximated distance $f$ downstream from the lens. 
 
 \subsection{One-dimensional wavefront model of the system}\label{sec:descriptionsystem}
@@ -206,7 +206,7 @@ The design and optimization of a deep learning system is more an art than a scie
     a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\    \includegraphics[width=0.75\textwidth]{figures/v12.png}
     b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.75\textwidth]{figures/v13.png}
     % \includegraphics[width=0.99\textwidth]{figures/v14.png}
-    \caption{Accuracy of the training data and validation data, for a) $N_S$=1000, and b) $N_S$=5000.
+    \caption{Accuracy of the training data and validation data, for a) $N_S$=1000 \inred{v12}, and b) $N_S$=5000 \inred{v13}.
     % , c) $N_S$=5000 but using Zernike coefficients instead of Gram-Schmidt.
     }
 \end{figure}
@@ -244,7 +244,7 @@ We analyse here the influence of several parameters, concerning the learning pro
 
 A first question is whether we improve the learning (getting a better accuracy value) by incrementing the number of epochs. Our tests showed that incrementing the number of epochs does not improve significantly the accuracy. The overfitting point (where the accuracy on the training and on the validation data crosses) is about the number of epochs used (1500). To effectively improve the learning we would need more samples. 
 
-Our 1D model is much simple than a full 2D model, thus each sample requires less data (we have $N_P\times N_A=64\times 256$ float-numbers instead of $32^3$ in PHASENET). The qustion is whether we can strongly reduce the capacity of the CNN. The answer is yes, but we would need more samples to get the same accuracy as in our standard configuration. If we remove the last convolutional block (which has the highest capacity) we get an accuracy value of 86\% (instead of 93\% for the standard configuration).
+Our 1D model is much simple than a full 2D model, thus each sample requires less data (we have $N_P\times N_A=64\times 256$ float-numbers instead of $32^3$ in PHASENET). The question is whether we can strongly reduce the capacity of the CNN. The answer is yes, but we would need more samples to get the same accuracy as in our standard configuration. If we remove the last convolutional block (which has the highest capacity) we get an accuracy value of 86\% (instead of 93\% for the standard configuration).
 
 
 \begin{figure}\label{fig:v14profiles}
@@ -302,8 +302,8 @@ Therefore, the use of a partially coherent beam (instead of the fully coherent b
     \includegraphics[width=0.99\textwidth]{figures/v23.png}
     b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
     \includegraphics[width=0.49\textwidth]{figures/v20.png}\includegraphics[width=0.49\textwidth]{figures/v23z.png}
-    \caption{Accuracy of the training data and validation data, for partial coherence calculations top) v23 $N_S$=5000 64 planes downstream from focus, 2500 epochs;
-    b) the same up to 15000 epochs; c) the same data in a log plot zoomed to observe the crossing around 10000 epochs.
+    \caption{Accuracy of the training data and validation data, for partial coherence calculations top) v23 $N_S$=5000 64 planes downstream from focus, 25000 epochs;
+    b) the same up to 1500 epochs; c) the same data in a log plot zoomed to observe the crossing around 10000 epochs.
     }
 \end{figure}
 
