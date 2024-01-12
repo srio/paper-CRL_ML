@@ -174,9 +174,11 @@ Once prepared a collection of $N_S$ sampled profiles, the wavefront simulation i
 
 
 \begin{figure}\label{fig:sample}
-    a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.8\textwidth]{figures/Figure2a.png}
-    b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.8\textwidth]{figures/Figure2b.png}
-    c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\\includegraphics[width=0.8\textwidth]{figures/Figure2c.png}
+\includegraphics[width=0.55\textwidth]{figures/figure2.pdf}
+
+    % a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.8\textwidth]{figures/Figure2a.png}
+    % b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.8\textwidth]{figures/Figure2b.png}
+    % c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\\includegraphics[width=0.8\textwidth]{figures/Figure2c.png}
     
     \caption{Examples or lens error profiles and intensity profiles. a) Three error profiles, b) their corresponding intensities at the center of the propagation interval, and c) propagation or caustic plot in the full interval for error profile number 5 (color in log scale). The CRL is made of a single lens, and only the first coherence mode is used.
     }
@@ -212,10 +214,11 @@ The design and optimization of a deep learning system is more an art than a scie
  We consider that this CNN model works satisfactorily and label it as our standard configuration. Further tests will follow to study how some changes in the configuration and parameters may influence the results.
 
 \begin{figure}\label{fig:v12v13}
-    a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\    \includegraphics[width=0.75\textwidth]{figures/v12.png}
-    b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.75\textwidth]{figures/v13.png}
-    c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.75\textwidth]{figures/v25.png}
-    \caption{Accuracy of the training data and validation data, for a) single-lens CRL $N_S$=1000, b) single-lens CRL $N_S$=5000, and c) multi-lens CRL $N_S$=10000 .
+    \includegraphics[width=0.55\textwidth]{figures/figure3.pdf}
+    % a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\    \includegraphics[width=0.75\textwidth]{figures/v12.png}
+    % b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.75\textwidth]{figures/v13.png}
+    % c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\ \includegraphics[width=0.75\textwidth]{figures/v25.png}
+    \caption{Accuracy of the training data and validation data, for a) single-lens CRL $N_S$=1000, b) single-lens CRL $N_S$=5000, and c) multi-lens CRL $N_S$=10000.
     }
 \end{figure}
 
@@ -265,7 +268,7 @@ accuracy is only two points below (91\% instead of 93\%), the predicted profiles
 
 
 \begin{figure}\label{fig:v14profiles}
-    \includegraphics[width=0.95\textwidth]{figures/figure4.pdf}
+    \includegraphics[width=0.75\textwidth]{figures/figure4.pdf}
     % a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b)~~~~~~~~~~~~~~~~~~\\
     % \includegraphics[width=0.45\textwidth]{figures/v13p101.png}
     % \includegraphics[width=0.45\textwidth]{figures/v14p101.png}
@@ -317,10 +320,10 @@ Therefore, the use of a partially coherent beam (instead of the fully coherent b
  
 \begin{figure}\label{fig:multimode}
     a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
-    \includegraphics[width=0.99\textwidth]{figures/v23.png}
+    \includegraphics[width=0.8\textwidth]{figures/v23.png}
     
     b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
-    \includegraphics[width=0.99\textwidth]{figures/v23zoom.png}
+    \includegraphics[width=0.8\textwidth]{figures/v23zoom.png}
     % b)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\\
     % \includegraphics[width=0.49\textwidth]{figures/v20.png}\includegraphics[width=0.49\textwidth]{figures/v23z.png}
     \caption{Accuracy of the training data and validation data, for partial coherence calculations top) $N_S$=5000 64 planes downstream from focus, 25000 epochs;
@@ -329,7 +332,7 @@ Therefore, the use of a partially coherent beam (instead of the fully coherent b
 \end{figure}
 
 \begin{figure}\label{fig:multimode}
-\includegraphics[width=0.95\textwidth]{figures/figure_multimode.pdf}
+\includegraphics[width=0.75\textwidth]{figures/figure_multimode.pdf}
 % \includegraphics[width=0.45\textwidth]{figures/v20p101.png}
 % \includegraphics[width=0.45\textwidth]{figures/v23p101.png}
 
@@ -358,7 +361,7 @@ accuracy on test data 96.7\%.
 The learning process for the CRL with 10 lenses is worse (see Fig.~\ref{fig:v12v13}c) than for the single lens (Fig.~\ref{fig:v12v13}b). This is related to the illuminated area. Indeed, the larger absorption of the 10 lenses makes that the illumination just after the CRL is smaller for the multi-lens CRL as compared to the single-lens CRL. Obviously, the CNN cannot predict the correct profile in a zone that is not illuminated, because the propagated intensity profiles have no changes if the error profile changes only in the dark side. To test this, we adjusted the abscissas interval of the generated random profiles to better match the illuminated area. As expected, we obtained better results (see Fig.\ref{fig:v26profiles}).
 
 \begin{figure}\label{fig:v26profiles}
-\includegraphics[width=0.95\textwidth]{figures/figure7.pdf}
+\includegraphics[width=0.75\textwidth]{figures/figure7.pdf}
 % \includegraphics[width=0.45\textwidth]{figures/v25p101.png}
 % \includegraphics[width=0.45\textwidth]{figures/v26p101.png}
 
