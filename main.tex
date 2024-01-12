@@ -265,26 +265,26 @@ accuracy is only two points below (91\% instead of 93\%), the predicted profiles
 
 
 \begin{figure}\label{fig:v14profiles}
-    a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b)~~~~~~~~~~~~~~~~~~\\
-    \includegraphics[width=0.45\textwidth]{figures/v13p101.png}
-    \includegraphics[width=0.45\textwidth]{figures/v14p101.png}
+    \includegraphics[width=0.95\textwidth]{figures/figure4.pdf}
+    % a)~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~b)~~~~~~~~~~~~~~~~~~\\
+    % \includegraphics[width=0.45\textwidth]{figures/v13p101.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v14p101.png}
 
-    \includegraphics[width=0.45\textwidth]{figures/v13p102.png}
-    \includegraphics[width=0.45\textwidth]{figures/v14p102.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v13p102.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v14p102.png}
 
  
-    \includegraphics[width=0.45\textwidth]{figures/v13p103.png}
-    \includegraphics[width=0.45\textwidth]{figures/v14p103.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v13p103.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v14p103.png}
 
     
-    \includegraphics[width=0.45\textwidth]{figures/v13p104.png}
-    \includegraphics[width=0.45\textwidth]{figures/v14p104.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v13p104.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v14p104.png}
 
-    \includegraphics[width=0.45\textwidth]{figures/v13p105.png}
-    \includegraphics[width=0.45\textwidth]{figures/v14p105.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v13p105.png}
+    % \includegraphics[width=0.45\textwidth]{figures/v14p105.png}
 
     \caption{Some original and fitted (predicted) profiles from samples in the test data. a) (left column): Standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases;
-    % (the same as in Fig.~\ref{fig:v12v13profiles}b, repeated here for better comparison); 
     b) The same model trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles.
     }
 \end{figure}
@@ -310,7 +310,7 @@ We also looked at what happens if we scan the image plane out of focus. We used 
 \subsubsection{Partial coherence.}
 The quality of the intensity images (the features in our CNN) is extremely important. The presence and detectability of some structures are fundamental to be able to retrieve the target profile. Consequently, a beam with less quality will produce worse images and therefore slow down the CNN learning (thus requiring more cycles or more data). In the limit, if the quality of the beam is too bad, the system simply does not work.  
 
-There are several physical factors that define the quality of the beam. We are affected by the emittance and coherence. In most works related to wavefront sensors, the beam is ``prepared" to record the point spread function. Usually this is achieved using a pinhole that will produce something that approximates a point source. In our case we do need a pinhole or slit, and we can use the direct synchrotron beam due to the low emittance of the 4$^{th}$ generation of synchtroton storage rings. The other parameter to look at is the coherence. Synchrotron radiation is not fully coherent, and is less and less coherent when increasing the photon energy. In the case analyzed here, the coherent fraction in the vertical direction of the undulator source at 7 keV is about 0.6 (see \cite{SanchezdelRio:ay5600} for a full discussion), therefore the beam cannot be considered fully coherent. An analysis of the coherence can be done using coherent mode decomposition (ibid). This means that the source is decomposed in a number of coherent modes (wavefronts) that should be propagated one by one and add their individual contributions to the intensity of the image. We re-run the simulation using partial coherence. Ten modes are enough to model with high quality the partially coherent beam (representing more than 99\% of its intensity). Although the volume of data created for the CNN training is the same, the calculation requires more than 10 times more time. The new results are used to train the CNN with the same parameters as the standard model. In Fig.~\ref{fig:multimode}a we can see the learning curves, manifesting a clear underfitting but arriving accuracy of 92\%. Increasing more and more (up to 25000) the number of epochs we see that the system improves (Fig.~\ref{fig:multimode}b). It is about $N_E=1000$ when the accuracy of the training and validation sets cross. However, although the accuracy on the validation set does not increase anymore, it does not decrease, ending in a value of 97\%. Fig.~\ref{fig:v20profiles} show some of these profiles for comparison.
+There are several physical factors that define the quality of the beam. We are affected by the emittance and coherence. In most works related to wavefront sensors, the beam is ``prepared" to record the point spread function. Usually this is achieved using a pinhole that will produce something that approximates a point source. In our case we do need a pinhole or slit, and we can use the direct synchrotron beam due to the low emittance of the 4$^{th}$ generation of synchtroton storage rings. The other parameter to look at is the coherence. Synchrotron radiation is not fully coherent, and is less and less coherent when increasing the photon energy. In the case analyzed here, the coherent fraction in the vertical direction of the undulator source at 7 keV is about 0.6 (see \cite{SanchezdelRio:ay5600} for a full discussion), therefore the beam cannot be considered fully coherent. An analysis of the coherence can be done using coherent mode decomposition (ibid). This means that the source is decomposed in a number of coherent modes (wavefronts) that should be propagated one by one and add their individual contributions to the intensity of the image. We re-run the simulation using partial coherence. Ten modes are enough to model with high quality the partially coherent beam (representing more than 99\% of its intensity). Although the volume of data created for the CNN training is the same, the calculation requires more than 10 times more time. The new results are used to train the CNN with the same parameters as the standard model. In Fig.~\ref{fig:multimode}a we can see the learning curves, manifesting a clear underfitting but arriving accuracy of 92\%. Increasing more and more (up to 25000) the number of epochs we see that the system improves (Fig.~\ref{fig:multimode}b). It is about $N_E=1000$ when the accuracy of the training and validation sets cross. However, although the accuracy on the validation set does not increase anymore, it does not decrease, ending in a value of 97\%. Fig.~\ref{fig:multimode} show some of these profiles for comparison.
 
 Therefore, the use of a partially coherent beam (instead of the fully coherent beam) just slows down the learning process but it is not a limiting factor for retrieving the target coefficients with high accuracy. Although it is dangerous to extrapolate this conclusion to different systems, it is very useful to know that simulations with full coherence are good approximations to model the system. Thus, they can be used for creating synthetic training data with a much reduced computational cost. 
 
@@ -328,21 +328,22 @@ Therefore, the use of a partially coherent beam (instead of the fully coherent b
     }
 \end{figure}
 
-\begin{figure}\label{fig:v20profiles}
-\includegraphics[width=0.45\textwidth]{figures/v20p101.png}
-\includegraphics[width=0.45\textwidth]{figures/v23p101.png}
+\begin{figure}\label{fig:multimode}
+\includegraphics[width=0.95\textwidth]{figures/figure_multimode.pdf}
+% \includegraphics[width=0.45\textwidth]{figures/v20p101.png}
+% \includegraphics[width=0.45\textwidth]{figures/v23p101.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v20p102.png}
-\includegraphics[width=0.45\textwidth]{figures/v23p102.png}
+% \includegraphics[width=0.45\textwidth]{figures/v20p102.png}
+% \includegraphics[width=0.45\textwidth]{figures/v23p102.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v20p103.png}
-\includegraphics[width=0.45\textwidth]{figures/v23p103.png}
+% \includegraphics[width=0.45\textwidth]{figures/v20p103.png}
+% \includegraphics[width=0.45\textwidth]{figures/v23p103.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v20p104.png}
-\includegraphics[width=0.45\textwidth]{figures/v23p104.png}
+% \includegraphics[width=0.45\textwidth]{figures/v20p104.png}
+% \includegraphics[width=0.45\textwidth]{figures/v23p104.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v20p105.png}
-\includegraphics[width=0.45\textwidth]{figures/v23p105.png}
+% \includegraphics[width=0.45\textwidth]{figures/v20p105.png}
+% \includegraphics[width=0.45\textwidth]{figures/v23p105.png}
 \caption{
 Some original and fitted (predicted) profiles from samples in the test data. We used here multimode partial coherence.
 a) (left column) 1500 epochs;
@@ -357,20 +358,21 @@ accuracy on test data 96.7\%.
 The learning process for the CRL with 10 lenses is worse (see Fig.~\ref{fig:v12v13}c) than for the single lens (Fig.~\ref{fig:v12v13}b). This is related to the illuminated area. Indeed, the larger absorption of the 10 lenses makes that the illumination just after the CRL is smaller for the multi-lens CRL as compared to the single-lens CRL. Obviously, the CNN cannot predict the correct profile in a zone that is not illuminated, because the propagated intensity profiles have no changes if the error profile changes only in the dark side. To test this, we adjusted the abscissas interval of the generated random profiles to better match the illuminated area. As expected, we obtained better results (see Fig.\ref{fig:v26profiles}).
 
 \begin{figure}\label{fig:v26profiles}
-\includegraphics[width=0.45\textwidth]{figures/v25p101.png}
-\includegraphics[width=0.45\textwidth]{figures/v26p101.png}
+\includegraphics[width=0.95\textwidth]{figures/figure7.pdf}
+% \includegraphics[width=0.45\textwidth]{figures/v25p101.png}
+% \includegraphics[width=0.45\textwidth]{figures/v26p101.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v25p102.png}
-\includegraphics[width=0.45\textwidth]{figures/v26p102.png}
+% \includegraphics[width=0.45\textwidth]{figures/v25p102.png}
+% \includegraphics[width=0.45\textwidth]{figures/v26p102.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v25p103.png}
-\includegraphics[width=0.45\textwidth]{figures/v26p103.png}
+% \includegraphics[width=0.45\textwidth]{figures/v25p103.png}
+% \includegraphics[width=0.45\textwidth]{figures/v26p103.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v25p104.png}
-\includegraphics[width=0.45\textwidth]{figures/v26p104.png}
+% \includegraphics[width=0.45\textwidth]{figures/v25p104.png}
+% \includegraphics[width=0.45\textwidth]{figures/v26p104.png}
 
-\includegraphics[width=0.45\textwidth]{figures/v25p105.png}
-\includegraphics[width=0.45\textwidth]{figures/v26p105.png}
+% \includegraphics[width=0.45\textwidth]{figures/v25p105.png}
+% \includegraphics[width=0.45\textwidth]{figures/v26p105.png}
 \caption{
 Some original and fitted (predicted) profiles from samples in the test data for the multi-lens CRL case. a) (left column) error profiles defined over a window of \SI{1500}{\micro\meter};
 accuracy on test data 72.6\%. 
@@ -417,7 +419,7 @@ We have shown in this work that a CNN trained with synthetic data is able to ret
 \ack{\textbf{Data availability}}
 % -----------------------------------------------------------------
 
-Data underlying the results presented in this paper are publicly available at (accessed: 02/12/2022):
+Data underlying the results presented in this paper are publicly available at (accessed: 12/01/2024):
 \begin{center}
 \small{\texttt{https://github.com/rafaelcelestre/mlcrl/}}
 \end{center}
