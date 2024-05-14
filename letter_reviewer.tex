@@ -84,136 +84,142 @@ Sanchez del Rio et al. present a convolutional neural network (CNN) for retrievi
 Below various issues are highlighted that should be addressed in the revised version:
 
 \begin{itemize}
-    \item 1. Title The title mentions lens aberrations, which are calculated as part of the methodology for retrieving the lens error profiles. However, the derived aberrations are never presented in the manuscript in any figure, instead comparisons are always made using the lens error profiles. The manuscript title should reflect that the article concentrates on the lens error profiles rather than the aberrations.
+    \item 1. Title. The title mentions lens aberrations, which are calculated as part of the methodology for retrieving the lens error profiles. However, the derived aberrations are never presented in the manuscript in any figure, instead comparisons are always made using the lens error profiles. The manuscript title should reflect that the article concentrates on the lens error profiles rather than the aberrations.
     
-    \inred{Indeed, the title has been changed to ``X-ray lens figure errors retrieved by deep learning from several beam intensity images".} \todo{Make clear in the text the connection figure-error and aberrations}
+    \inred{The title has been changed to ``X-ray lens figure errors retrieved by deep learning from several beam intensity images". The correlation between figure errors and aberrations is done in the paper via the Zernike coefficients, but, we agree, that the aberrations are not addressed by their names.}
     
     \item 2. Abstract: The “phase problem” is mentioned in the Abstract but never referred to again. Potentially this work could be related to the phase problem, but this needs to be at least expanded upon in the introduction if it is to remain in the Abstract.
     
-    \todo{Make clear in the text the connection aberrations and phase-problem}
+    \inred{We reworded part of the introduction trying to clarify that surface errors produce wavefront deformation affecting the phase, and the ``phase problems" manifests the difficulty to retrieve the phase by measurements of intensity (the available ones).}
     
     \item 3. In the last sentence of the abstract the authors claim that their work demonstrates that their method can be extended to other optical systems beyond an X-ray lens, but the manuscript does not expand upon this point at all.
     
-    \todo{mention in the text the extension to other focusing systems}
+    \inred{It is clear that any focusing system (refractor, reflector or diffractor) where the optical surface can be expressed as a main ideal surface plus a surface error can be treated with our methodology. We mentioned that in a new sentence at the end of the Conclusions section.}
     
 
     \item Introduction: 4. The authors say “they [the surface errors] are measured by the metrology laboratories that most synchrotron facilities have” (p2, 2nd paragraph). One should straightforwardly cite a couple of articles describing appropriate examples from various synchrotrons such as the ESRF.
     
-    \todo{}
+    \inred{Three citations added: (Assoufid et al., 2005; Rommeveaux et al., 2005; Rommeveaux et al., 2007)}
     
 
     \item 5. It is stated the “The shape of these profiles is compatible with the experience learned from direct in-situ experiments (Celestre et al., 2022)” (p3, 2nd paragraph). This sentence is somewhat vague. Are the authors saying that the profiles are similar to those in the cited manuscript? That experimental paper describes the measurement of 2D profiles of diamond and beryllium lenses, so it is difficult to compare to the 1D radial profiles presented in this manuscript. In addition, the geometrical aperture of the real lenses studied in the previous publication are much smaller than simulated here (~ 500 um compared to ~ 1500 um).
     
-    \inred{The reviewer is right that the error profiles were 2D. However, the analysis using Zernike polynomials is well adapted to 2D images with azimuthal symmetry. Indeed, most polynomials (or aberrations) found had only radial dependency and not azimuthal dependency. This experimental feature was used in our analysis to justify the use of 1D profiles. } \todo{Rafael: check...}
+    \inred{
+    We are now more specific in saying that ``The shape of these profiles is compatible to what is generally found for embossed 2D lenses regardless of their radius or curvature" and two references are added. 
+    
+    The reviewer is right that the error profiles were 2D. However, the analysis using Zernike polynomials is well adapted to 2D images with azimuthal symmetry. Indeed, most polynomials (or aberrations) found had only radial dependency and not azimuthal dependency. This experimental feature was used in our analysis to justify the use of 1D profiles. }
     
 
     \item Methods: 6. While the authors say that the studied optical configuration is “a single X-ray lens illuminated by a monochromatic X-ray beam” (p4, 1st paragraph), it is not clear whether this is truly monochromatic (zero bandwidth) or instead has finite bandwidth (~ 1 eV). Our reading of the text suggests the former, as the authors never discuss the effect of a finite energy bandwidth on their simulations. Of course, in practice a DCM would typically be used to monochromate the beam, but no DCM is shown in the screenshot presented in Figure 1. The authors should make comment regarding the implications of using a DCM for a real beamline, especially the potential impact of thermally-induced deformations on the 1st DCM crystal, which would surely affect the shape of the wavefront of the beam, and therefore impact upon the methodology described in the manuscript for measuring the lens error profiles.
     
-    \inred{The simulations are done using truly monochromatic $\Delta E=0$ wavefronts. Because of the chromatic aberrations of the refractors, this is justified if a monochromator is used. The typical DCM Si 111 monochromator has a resolution of approximately $\Delta E/E \approx 10^{-4}$, therefore less than 1 eV at the used energy of 7 keV. The chromatic aberrations within this small bandwidth are negligible, therefore it is reasonable to use strictly monochromatic wavefronts. In theory, the monochromator does not modify the focusing if the crystals have the ideal (plane) optical surfaces. Indeed, as remarked by the reviewer, the thermal load makes the surfaces non-planar, thus introducing some aberrations. However, the monochromators are designed to minimize these errors to limits to produce an irrelevant loss in energy resolution that is typically accompanied by no change in focusing. In the eventual case that there is some residual curvature, it would mostly affect the radius of curvature (that can be corrected) and not the other aberrations with higher spatial frequency.}
+    \inred{
+    We have added a paragraph in Section 1.1 explaining why we do not simulate the slits and the DCM and why this is justified in our calculations.  
+    % The simulations are done using truly monochromatic $\Delta E=0$ wavefronts. Because of the chromatic aberrations of the refractors, this is justified if a monochromator is used. The typical DCM Si 111 monochromator has a resolution of approximately $\Delta E/E \approx 10^{-4}$, therefore less than 1 eV at the used energy of 7 keV. The chromatic aberrations within this small bandwidth are negligible, therefore it is reasonable to use strictly monochromatic wavefronts. In theory, the monochromator does not modify the focusing if the crystals have the ideal (plane) optical surfaces. Indeed, as remarked by the reviewer, the thermal load makes the surfaces non-planar, thus introducing some aberrations. However, the monochromators are designed to minimize these errors to limits to produce an irrelevant loss in energy resolution that is typically accompanied by no change in focusing. In the eventual case that there is some residual curvature, it would mostly affect the radius of curvature (that can be corrected) and not the other aberrations with higher spatial frequency.
+    }
     
 
     \item 7. Figure 1 (p5) shows the OASYS workspace used for the modelling. If the two slits shown in the model are fully open (and therefore do not affect the simulation) surely it would be clearer for the reader to exclude them from the figure altogether. In addition the widget captions are rather small and some are exclude them from the figure altogether. In addition the widget captions are rather small and some are overlapping.
     
-    \todo{We changed the workspace in Fig. 1 and supressed the unused slits.}
+    \inred{We changed the workspace in Fig. 1 and suppressed the unused slits.}
     
 
     \item 8. The authors should clarify the type of aberrations that all of the included Zernike coefficients correspond to (p6, 2nd paragraph). At present this is only described for Noll numbers 22 and 37.
     
-    \todo{We added the ``text" description of the aberrations used.}
+    \inred{We added the ``text" description of the aberrations used: ``these include astigmatism, trefoil, coma, quadrafoil and primary spherical aberrations."}
     
 
     \item 9. It is not clear what the purpose is of Figure 2 (p8). One would expect that there would be more structure in panels (b) or (c) which would be encoding information about the error profiles shown in panel (a). From Figure 2 it is difficult to see how one would be able to retrieve such profoundly different error profiles (panel (a)) based on the information in panels (b) and (c). The authors should clarify this point by either providing more discussion of the simulations presented in Figure 2, or by recreating this figure with more illuminating data in panels (b) and (c).
     
-    \todo{In fact, the purpose of this figure is to show an overview of the experiment and illustrate the fact that ``big" changes in profile always correspond to ``small" changes in the intensity profile. Thus, it is important to rely on a method that can detect these small differences and exploit them to retrieve the correct aberrations (profiles). The ML system proposed can do that, even if it can be seen externally as a sort of ``magic" process. }
+    \inred{The purpose of this figure is to show an overview of the experiment and illustrate the fact that ``big" changes in profile always correspond to ``small" changes in the intensity profile. The ML system proposed exploits these small differences, even if it can be seen externally as a sort of ``magic" process. We added a paragraph explaining this: ``It can be appreciated that ``big" changes in profile always correspond to ``small" changes in the intensity profile. The deep learning method should be able to detect these small differences and exploit them to retrieve the correct profiles."}
     
 
     \item 10. The text explaining the CNN used in the model (p9, 1st paragraph) is almost entirely lifted from Saha et al., 2020. The authors should reword this text, and should further highlight the very close correspondence of their CNN with PHASENET.
         
-    \todo{}
+    \inred{It has been reworded. It is clearly stated that ``We constructed a convolutional neural network (CNN) using Keras (Chollet et al., 2015), inspired by the architecture of PHASENET (Saha et al., 2020)." All along our paper, we cite many times the Saha paper, without hiding that it was our inspiration.}
     
     \item Results: 11. The initial part of the Results section (p9-10, until the beginning of Section 3.0.1) should be in the Methods, as it provides more details about how the CNN has been adapted from PHASENET (Saha et al., 2020).
     
-    \todo{}
+    \inred{These paragraphs have been moved to the previous section.}
     
     \item 12. In Section 3.0.1 the authors state “It is remarked (Fig 3a) how the learning slope reduces at about 300 epochs.” (p10, 2nd paragraph). Do the authors mean it is remarkable, or they just want to mention it? Is it possible for the authors to provide any insight about the CNN from the inflection points in Fig 3(a) and Fig 3(c)?
     
-    \todo{}
+    \inred{This sentence has been reworded to become clearer.}
     
     \item 13. There is significant overlap between the material covered in the Results and Discussion sections, and potentially the two could be combined.
     
-    \todo{}
+    \inred{We agree that the Discussion section contains more calculations that could be in Results. Merging the two sections would make a new very long section with lots of subsections. We prefer to keep separately the Results and Discussion. The Results focus on the main systems analyzed, whereas the Discussion illustrates and comments on several problems also necessitating new simulations. We believe it is easier to read in this way.}
     
     \item Discussion: 14. The authors explain that partial coherence of the X-ray beam was simulated using the coherent mode decomposition method introduced by them in a previous article (Sanchez del Rio 2020) (p15, 2nd paragraph). It appears the authors have used exactly the same description of the partially coherent X-ray beam that was presented in that manuscript (not just used the same method). If so, it should be clearly stated.
     
-    \todo{}
+    \inred{Yes, the method is the same. Also the system is very similar, as we use the same storage ring (EBS-ESRF), the same undulator, the same photon energy, and similar, but not the same CRLs (different focal lengths). We are not sure about the need to make explicit the similarity of the systems and address the reader to the paper for the system. The description we make in the paper is standalone and autoconsistent. Our paper (2022, not 2020) must be cited for referring to the method used.}
     
     \item 15. It is not clear how helpful it is to include so many panels in Figures 4, 6 and 7. The reader also does not need to know that there were two different names for each sample (e.g. sample 101 is also sample \# 3434). The lines in these figures also could be changed so they are not all solid for legibility. Different colours should be used for the different predictions in each column while keeping the colour of the ‘original’ the same in both. This will help the reader to quickly understand what is changing and what is not. The horizontal range of all the plots is the same: it would greatly help legibility if the figures were stacked together and only two horizontal axes were included at the bottom.
     
-    \todo{We put 5 panels to appreciate the variability: good matting, less good, and intermediate. We re-created the figures applying the good reviewer's advice.}
+    \inred{We put 5 panels to appreciate the variability: good matching, less good, and intermediate. We believe 5 panels are adapted to give a statistical idea of the variability in the results. We re-created the figures removing the title with the set id's following  the reviewer's advice.}
     
     \item 16. Figure 5(b) could be included as an inset to Figure 5(a) so it is clearer that one is simply a zoomed- in view of the other.
     
-    \todo{Done.}
+    \inred{Done.}
     
     \item 17. It was not clear to us how the predictions presented in the right column of Figure 7 were only defined over a window of 0.8 mm (according to the text) and yet are plotted over a range of about 1.5 mm. Perhaps something in the methodology is unclear.
     
-    \todo{}
+    \inred{In fact, there is a problem with the abscissas axis. It has been corrected. The figure has been refactored following the new style in Figs. 4 and 6. }
     
     \item 18. Throughout most the manuscript, the accuracies of different simulations are presented as a percentage, but on p21 (1st paragraph) they are presented as decimal numbers (e.g. 0.726 instead of 72.6\%).
     
-    \todo{Done}
+    \inred{Changed.}
     
     \item 19. Figure 8 claims to plot three curves, but only two are distinguishable due to the close agreement between the three. In any case this Figure does not provide significant additional information, and if the authors wish to highlight that the focused beam is similar in all three cases they can do so in the text.
     
-    \todo{}
+    \inred{The figure has been regenerated changing line style and markers to distinguish all three curves.}
     
     \item Conclusions: 20. The first sentence of the conclusion (p22) is poorly structured and difficult to follow.
     
-    \todo{}
+    \inred{It has been reworded.}
     
     \item 21. The Conclusions appear to be more concerned with plans for future work rather than summarising the results found in this work. In particular the authors should highlight how this work extends previous work - especially Saha et al., 2020 – in simulating the effect of partial coherence and also exploring the importance of using an orthonormal basis for the aberration coefficients.
     
-    \todo{}
+    \inred{The conclusions are about 8 lines. Then 4 lines for the future (the use of 2D images and starting to use experimental data). Finally 4 new lines address the suitability of the method for non-refractive focusing. Although the methodology and the main area of applicability (Optics) is the same as in Saha et al., the aim of our work is not to ``extend" Saha et al., but we apply it in another context. }
     
-    \item Data availability: 22. It is not clear whether the authors need to clarify when the GitHub repository was last accessed when providing the link. There are many stylistic and typographic issues throughout the manuscript, a few are highlighted below:
+    \item Data availability: 22. It is not clear whether the authors need to clarify when the GitHub repository was last accessed when providing the link. 
     
-    \todo{}
+    \inred{It is usual to add the access date when referring to a website. The Web is dynamic and the site may change or disappear. We also cleaned the site and moved it to a more official address. }
     
-    \item 23. Parentheses are overused as a stylistic device throughout the manuscript
+    \item There are many stylistic and typographic issues throughout the manuscript, a few are highlighted below: 23. Parentheses are overused as a stylistic device throughout the manuscript
     
-    \todo{}
+    \inred{We did a complete spelling and grammar check.}
     
     \item 24. The way the manuscript is divided into sections does not appear to have carefully chosen. For example, sections 4.0.X should surely be sections 4.X.
     
-    \todo{}
+    \inred{Done.}
     
     \item 25. On p1, no affiliation index is needed because all authors are from the same institution
     
-    \todo{}
+    \inred{This is how the IUCr template produces the text. We are sure that these details are efficiently managed by the editors.}
     
     \item 26. On p4, 1st paragraph: appex should be apex
     
-    \todo{}
+    \inred{Changed. Thank you!}
     
     \item 27. On p6, 2nd paragraph: “Error profile samples are by created” should be “Error profile samples are created by”
     
-    \todo{}
+    \inred{Changed. Thank you!}
     
     \item 28. On p6, 2nd paragraph: “tertian” should be “tertiary”
     
-    \todo{}
+    \inred{Changed. Thank you!}
     
     \item 30. On p14, 2nd paragraph: “of a less good learning” could be “of poorer quality learning”
     
-    \todo{}
+    \inred{Changed. Thank you!}
     
     \item 31. On p21, 2nd paragraph: “guessed error profile for the sample 103 in 7” should be “estimated error profile for sample 103 in Fig. 7”
     
-    \todo{}
+    \inred{Changed. Thank you!}
     
     \item 32. The article which introduces the coherent mode decomposition method is cited twice (Sanchez del Rio, 2022a and Sanchez del Rio, 2022b)
     
-    \todo{}
+    \inred{Solved.}
     
 \end{itemize}
 
