@@ -1,35 +1,7 @@
-% https://doi.org/10.1364/OE.27.000240
-% https://matheo.uliege.be/bitstream/2268.2/6800/6/pvanberg_thesis.pdf    https://ml4physicalsciences.github.io/2019/files/NeurIPS_ML4PS_2019_107.pdf
-
-% https://doi.org/10.1063/1.5125252 <<<<<<
-
-% https://doi.org/10.1038/s41598-020-65417-y
-
-% https://doi.org/10.1364/AO.52.007435
-
-% https://www.vision-systems.com/boards-software/article/14169513/deep-neural-network-accurately-retrieves-phase-information-from-3d-pointspread-functions
-
-% https://doi.org/10.1111/jmi.13083  << Use Z>15
-
-% https://arxiv.org/pdf/2106.04456v1.pdf  << good intro of ML for WF Sensors  || Discussion on fundamental limits.
-
-% https://arxiv.org/pdf/2211.05242.pdf   Zernike distribution, hybrid system
-
-% https://arxiv.org/pdf/1812.01082.pdf
-
-%
-% accelerator/ID stuff
-% https://doi.org/10.1107/S1600577522008554
-% https://journals.aps.org/prab/pdf/10.1103/PhysRevAccelBeams.23.044601
-
-
 \documentclass[preprint]{iucr}
-% \documentclass{iucr}
 
 \usepackage{siunitx}
 \usepackage{color}
-% \usepackage{amsmath,amssymb}
-% \usepackage{amsfonts} 
 \usepackage{mathtools}
 \usepackage[normalem]{ulem}
 \usepackage{adjustbox}
@@ -57,7 +29,6 @@
 \newcommand*\rot{\multicolumn{1}{R{90}{1em}}
 }
 
-
 \makeatletter
 \@ifclasswith{iucr}{preprint}{
 \newcommand{\whencolumns}[2]{#1}
@@ -67,10 +38,10 @@
 \makeatother
 
 
- %-------------------------------------------------------------------------
- % Information about journal to which submitted
- %-------------------------------------------------------------------------
- \journalcode{S}
+%-------------------------------------------------------------------------
+% Information about journal to which submitted
+%-------------------------------------------------------------------------
+\journalcode{S}
 
 \begin{document}   
 
@@ -84,7 +55,7 @@
 
 \aff[a]{The European Synchrotron, 71 Avenue des Martyrs, 38000 Grenoble, {France}}
 
-\maketitle                        % DO NOT DELETE THIS LINE
+\maketitle % DO NOT DELETE THIS LINE
 
 \begin{synopsis}
 We demonstrate that a neural network trained with a few thousand simulations using random errors can predict accurately the lens error profile that accounts for all aberrations of a compound refractive lens in a synchrotron beamline. 
@@ -99,8 +70,11 @@ We address the phase problem in the context of focusing synchrotron beams with x
 % The main body of the paper
 %-------------------------------------------------------------------------
 
-
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 \section{Introduction}\label{sec:intro}
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 It is well known that the performances of the optical elements in  a synchrotron beamline are limited by surface errors \inred{\cite{Yabashi2014, Schroer2014, Cocco2022}}. The surface errors originate aberrations in the x-ray beam, modifying its properties and limiting the required capabilities (usually focusing, but also affecting collimation and even energy resolution). Moreover, with the advent of a new generation of storage-ring sources (like the EBS-ESRF) and X-ray free electron lasers, the requirements on the optics are more and more demanding, as beam quality (small emittance, beam coherence) dramatically improves. Now, beam degradation originated \inred{from} any defect (either from fabrication, surface errors or from contamination) is amplified with a coherent source. The optics must accomplish its role preserving the good qualities of the wavefront \cite{Cocco2022}. 
 
@@ -119,8 +93,8 @@ In particular, the analysis of aberrations with deep learning for 3D microscopy 
 %-------------------------------------------------------------------------
 %-------------------------------------------------------------------------
 
+%-------------------------------------------------------------------------
 \subsection{Description of the optical system}\label{sec:descriptionsystem}
-
 The optical configuration studied here consists \inred{of} a single x-ray lens illuminated by a monochromatic x-ray beam emitted by an undulator in the EBS-ESRF storage ring. It is a simplified part of the future EBSL1 beamline.
 The x-ray source is a U18 undulator (period $\lambda_u=\SI{18}{\milli\meter}$) with $N_u=138$ periods placed in the center of a straight section of the EBS storage-ring\footnote{We used the electron beam sizes and divergences $\sigma_x=\SI{29.7}{\micro\meter}$,
 $\sigma_{x'}=\SI{4.37}{\micro\radian}$,
@@ -139,6 +113,7 @@ A first CRL implements a single-lens with radius at the \inred{apex} $R=\SI{50}{
  The typical DCM Si 111 monochromator has a resolution of approximately $\Delta E/E \approx 10^{-4}$, therefore less than 1 eV at the used energy of 7 keV. The chromatic aberrations within this small bandwidth are negligible, therefore it is reasonable to use strictly monochromatic wavefronts, as we do. In theory, the monochromator does not modify the focusing if the crystals have the ideal (plane) optical surfaces. However, the thermal load makes the surfaces non-planar, thus introducing aberrations. The monochromators are designed to minimize these errors to limits to produce an irrelevant loss in energy resolution that is typically accompanied by no change in focusing. In the eventual case that there is some residual curvature, it would mostly affect the radius of curvature (defocus, which can be corrected) and not the other aberrations with higher spatial frequency.
  }
 
+%-------------------------------------------------------------------------
 \subsection{One-dimensional wavefront model of the system}\label{sec:1Dmodel}
 The complexity of modelling accurately and realistically a synchrotron system resides in the fact that the beam is partially coherent. Completely incoherent beams can be simulated using ray tracing, and fully coherent beams with wavefront propagation. Partial coherence uses wavefront simulations, but considering multiple wavefronts. Two methods are used: multielectron Monte Carlo simulation \cite{codeSRW_ME} and coherent mode decomposition \cite{Glass2017}. We recently discussed the interest of studying the system in one dimension and demonstrated the possibility of performing coherent-mode decomposition \cite{multioptics}  using fewer computer resources. We decided to first use this 1D method to study the system in the vertical direction. 
 The intensity distribution of the refracted beam recorded at $N_P$ different propagation positions (downstream from the lens) in an interval around the focal length $f\pm\Delta d$, which for the single-lens CRL is \SI{3.592}{\meter}$\pm$\SI{0.5}{\meter}, and for the multi-lens CRL is \SI{0.359}{\meter}$\pm$\SI{0.05}{\meter}.
@@ -151,6 +126,7 @@ The Oasys \cite{codeOASYS} simulation workflow is shown in Fig.~\ref{fig:oasys}.
     }
 \end{figure}
 
+%-------------------------------------------------------------------------
 \subsubsection{Sampling error profiles}
 In a simulation, a thin layer of the lens material (Be) with a given profile is added to the parabolic profile of the lens. Lens refraction is simulated using the thin object approximation \inred{[see, e.g. \cite{Celestre2020, multioptics}]}. Our main objective is to retrieve this profile from the refracted beam intensities. \inred{In the thin element approximation, the error profile in projection approximation $\Delta_z$ is directly proportional to the phase $\phi$ it impinges on the wavefront: $\phi = - \frac{2\pi}{\lambda} \delta \Delta_z$, where $\lambda$ is the wavelength and $\delta$ is the index of refraction decrement as in $n=1-\delta$. Hence, obtaining the error profile from intensity measurements can be seen as a way of addressing the phase problem \cite{Taylor1981, Klibanov1995}.}
 To do that, we will train a CNN, but for that, we need a large collection of lens error profiles. We describe here how to parametrize and sample the error profiles to have realistic sampled data. In terms of machine learning [see, e.g. \cite{chollet_book}], this is part of the feature engineering, a process of using your knowledge about the data and the CNN to make the algorithm work better by applying hardcoded (non-learned) transformations to the data before it goes into the model.
@@ -160,8 +136,8 @@ Error profile samples are \inred{created by} defining a set of Zernike coefficie
 
 The Zernike coefficients are orthonormal on a domain that is a disk of radius unity. If we limit the domain to another shape (e.g. rectangle), or, in our case, we reduce the dimensionality (1D vertical cuts), the Zernike polynomials no longer form an orthonormal set of polynomials. To solve this inconvenience, to inject into the CNN a consistent input, we orthogonalized our base of 1D cuts of Zernike polynomials using the Gram-Schmidt method, to obtain a new orthonormal 1D basis. Therefore, the coefficients to be passed to the CNN are those of Gram-Schmidt base, and not those of the 1D Zernike cuts. This does not change the sampled error profiles used in the wavefront simulations, but changes the target values used to train and test the CNN.  
 
+%-------------------------------------------------------------------------
 \subsection{Deep learning system}
-
 Once prepared a collection of $N_S$ sampled profiles, the wavefront simulation is run for each one. For each sample,  we calculate intensity distribution at the $N_P$ propagation images. Each simulated intensity plot has 1500 points. To save data volume, we reduced the number of points by interpolation to $N_A=256$ points (making sure we do not miss characteristic features, structures, or artifacts in the intensity distribution). Therefore, the $N_S$ runs of the wavefront simulator produce a stack of $N_S \times N_P \times N_A$ float number values, that constitute the data for the CNN. The target data is a stack of $N_S \times 7$ values, containing the Gram-Schmidt coefficients. The data stack is saved in an \texttt{hdf5} file and the target data in a \texttt{txt} file to be passed to the CNN. Running the wavefront simulations for $N_S=5000$ lasted about 2h in a CPU using a single coherent mode. For partial coherence simulations, we propagated 10 coherent modes that contain more than 99\% of the total intensity, therefore it takes about 10 times more running time. Figure~\ref{fig:sample} shows an example of how the data looks for the first sample (defined with no deformation) and for another run. \inred{It can be appreciated that ``big" changes in profile always correspond to ``small" changes in the intensity profile. The deep learning method should be able to detect these small differences and exploit them to retrieve the correct profiles. }
 
 
@@ -192,9 +168,11 @@ The design and optimization of a deep learning system is more an art than a scie
 %-------------------------------------------------------------------------
 %-------------------------------------------------------------------------
 \section{Results for the 1D propagation model}\label{sec:results}
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
- %-------------------------------------------------------------------------
- \subsection{Results for CRL made of a single lens}
+%-------------------------------------------------------------------------
+\subsection{Results for CRL made of a single lens}
  The accuracy of the training and validation data is shown in Fig~\ref{fig:v12v13} versus the number of epochs.
  We made the first run with $N_S=1000$.
  \inred{It can be appreciated in Fig~\ref{fig:v12v13}a how the learning slope reduces at about 300 epochs. The accuracy of the validation data reaches only 79\%.}
@@ -217,6 +195,8 @@ The design and optimization of a deep learning system is more an art than a scie
 %-------------------------------------------------------------------------
 %-------------------------------------------------------------------------
 \section{Discussion}\label{sec:discussion}
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
 We analyze here the influence of several parameters, concerning the learning procedure and also the influence of some physical aspects, like the use of a partially coherent beam.
 
@@ -224,13 +204,10 @@ We analyze here the influence of several parameters, concerning the learning pro
 \subsection{Use of orthonormal basis.} The question is whether the use of an orthonormal basis for expressing the target coefficients is important. We tested the system using as targets in the training procedure the Zernike 1D coefficients instead of the Gram-Schmidt ones. As expected, the results are not so good: although 
 accuracy is only two points below (91\% instead of 93\%), the predicted profiles agree visually less well to the true profiles is worse (Fig.~\ref{fig:v14profiles}). However, a system using decomposition in non-orthogonal coefficients also well. 
 
-
 \begin{figure}\label{fig:v14profiles}
 % v13 and v14
     \includegraphics[width=0.75\textwidth]{figures/figure4.pdf}
     \caption{Some original and fitted (predicted) profiles from samples in the test data.
-    % a) (left column): Standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases;
-    % b) The same model trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles.
     \inred{In blue the original profile. In orange the standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases. In green the same model was trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles. Each profile has been shifted vertically for clarity, and the corresponding horizontal shifted axis is displayed.
     }
     }
@@ -308,15 +285,17 @@ Intensity distributions for the multi-lens CRL at the central plane of the propa
 %-------------------------------------------------------------------------
 %-------------------------------------------------------------------------
 \section{Conclusions}\label{sec:conclusions}
+%-------------------------------------------------------------------------
+%-------------------------------------------------------------------------
 
-The trained CNN is a robust model that works satisfactorily in many conditions. Many tuning parameters that can be changed in the CNN and also physical phenomena like the number of planes used or the effect of partial coherence have been analyzed and, although showing more or less sensitivity to the accuracy of the results, they always produce reasonably good results. This feasibility study opens the way to other more complete analyses. The next effort will consist in dealing with 2D wavefronts and images.  
+\inred{Relying solely on the intensity of the propagated beam at different distances, we illustrated how neural networks could accurately predict the surface error of a lens system. While this methodology has been demonstrated in other fields, such as 3D microscopy, for example \cite{Saha2020}, we not only expanded this approach into the x-ray range but also investigated into the influence of the synchrotron radiation partial coherence. Furthermore, we examined the significance of utilizing aberration coefficients from an orthonormal basis to consistently train the neural networks.}
+
+The trained CNN is a robust model that works satisfactorily in many conditions. Many tuning parameters that can be changed in the CNN and also physical phenomena like the number of planes used or the effect of partial coherence have been analyzed and, although showing more or less sensitivity to the accuracy of the results, they always produce reasonably good results. This feasibility study opens the way to other more complete analyses. The next effort will consist of dealing with 2D wavefronts and images.  
 The usefulness of the CNN trained with synthetic data and being fed with  experimental images will be addressed in a future work.
 \inred{Last, but not least, this methodology is not restricted to refractors (our x-ray lenses), but can be applied to any focusing system also with reflectors and diffractors, and are independent of the multiple origins of the surface shape errors (fabrication process, clamping and gravity sag, thermal load deformations). }
 
 
 %-------------------------------------------------------------------------
-%-------------------------------------------------------------------------
-
 %-------------------------------------------------------------------------
 
 % \ack{\textbf{Funding information}}
@@ -336,7 +315,7 @@ The usefulness of the CNN trained with synthetic data and being fed with  experi
 Data underlying the results presented in this paper are publicly available at \newline
 % (accessed: 16/05/2024):
 % \begin{center}
-\small{\texttt{https://github.com/oasys-esrf-kit/Paper\_JSR\_zt5005}}
+\small{\texttt{https://github.com/oasys-esrf-kit/Paper\_JSR\_zt5005}}(last accessed: May 16, 2024)
 % \end{center}
 
 % -----------------------------------------------------------------
