@@ -106,8 +106,7 @@ It is well known that the performances of the optical elements in  a synchrotron
 
 Whenever possible, the surface errors must be minimized during the fabrication process. After fabrication, they are measured by the metrology laboratories that most synchrotron facilities have - \inred{see for example \cite{round_robin1, round_robin2, round_robin3}}. This ex-situ characterization is fundamental for the \inred{acceptance} of the optics \inred{before} the installation in the beamline, but in many cases \inred{is} not sufficient to determine the aberrations that will \inred{be produced} in the x-ray beam. This is because the optical elements are dynamic and can move (e.g., bendable \inred{mirrors}) or their configuration change (e.g., transfocators that use a large number of x-ray lenses). Moreover, it is always useful to measure the errors using the same probe (light wavelength) that will be used in operation: x-rays. It is therefore convenient to make in-situ (or \textit{at-wavelength}) beamline measurements for the characterization of optical errors. \inred{This can be done using direct methods or indirect measurements. Examples of direct methods are} wavefront sensors \inred{\cite{Mercere2005, Mikhaylov2020}, or x-ray phase-sensitive techniques such as speckle-tracking \cite{berujon_theory_2020, berujon_experiments_2020} or ptychography \cite{Schropp2013}}. \inred{All of them require a dedicated infrastructure and experimental plan \inred{to retrieve the phase of the wavefront that encodes the information of the surface deformation profile (thus the errors)}. That means solving the ``phase problem", a challenge to determine the phase of a wave based on measurements of its intensity.}
 
-\inred{Indirect methods retrieve the wavefront aberration }
-from the intensity images of a good quality beam, \inred{without using a specific instrument or technique}. Examples of indirect measurements are the retrieval of the optical surface using images from a scanned slit \cite{Zhang:ve5019}, or looking at the beam evolution recording images at different positions \inred{like the beam caustics presented in \cite{Celestre:yi5119}}. The indirect measurements of the surface errors are much less accurate than the direct in-situ measurements or characterization from metrology laboratories but have the advantage that can be obtained in a short time using only instrumentation available at the beamline. They are also limited in spatial resolution (highest spatial frequency), which depends on the quality of the beam used as a probe and the detector point spread function. \inred{However}, the main problem of the indirect measurements is the difficulty \inred{of obtaining a good representation of} the surface deformation profile (thus the errors) from intensity images. \inred{The optical surface errors are encoded in the wavefront phase,} which is not directly measurable. The aberrations are \inred{related to wavefront deformation, therefore produced by surface errors and also } encoded in the wavefront phase. Phase retrieval, or determination of the phase, requires the use of different techniques and algorithms, and several intensity images.
+\inred{Indirect methods retrieve the wavefront aberration} from the intensity images of a good quality beam, \inred{without using a specific instrument or technique}. Examples of indirect measurements are the retrieval of the optical surface using images from a scanned slit \cite{Zhang:ve5019}, or looking at the beam evolution recording images at different positions \inred{like the beam caustics presented in \cite{Celestre:yi5119}}. The indirect measurements of the surface errors are much less accurate than the direct in-situ measurements or characterization from metrology laboratories but have the advantage that can be obtained in a short time using only instrumentation available at the beamline. They are also limited in spatial resolution (highest spatial frequency), which depends on the quality of the beam used as a probe and the detector point spread function. \inred{However}, the main problem of the indirect measurements is the difficulty \inred{of obtaining a good representation of} the surface deformation profile (thus the errors) from intensity images. \inred{The optical surface errors are encoded in the wavefront phase,} which is not directly measurable. The aberrations are \inred{related to wavefront deformation, therefore produced by surface errors and also} encoded in the wavefront phase. Phase retrieval, or determination of the phase, requires the use of different techniques and algorithms, and several intensity images.
 
 We analyze here an optical system to focus a synchrotron beam using x-ray lenses. It is derived from a typical beamline configuration at ESRF, in particular for ID18. This system was the object of previous investigations \inred{\cite{multioptics}}. We solve the problem of phase retrieval from a collection of images measured at different distances around the focus by using a trained neural network. This work, based on simulations, demonstrates the feasibility of measuring the aberrations originated by the x-ray lenses using only intensity measurements in the neighborhood of the focal position. For that, we train a convolutional neural network (CNN) with synthetic profiles obtained from random variations of some generation polynomials. \inred{The shape of these profiles is compatible \inred{with} what is generally found for embossed 2D lenses \cite{Roth2017} regardless of their radius or curvature \cite{Celestre2020, Seiboth2020, Dhamgaye2020, Celestre:yi5119}.}
 
@@ -141,20 +140,19 @@ A first CRL implements a single-lens with radius at the \inred{apex} $R=\SI{50}{
  }
 
 \subsection{One-dimensional wavefront model of the system}\label{sec:descriptionsystem}
-The complexity of modelling accurately and realistically a synchrotron system resides in the fact that the beam is partially coherent. Completely incoherent beams can be simulated using ray tracing, and fully coherent beams with wavefront propagation. Partial coherence use wavefront simulations, but considering multiple wavefronts. Two methods are used: multielectron Monte Carlo simulation \cite{codeSRW_ME} and coherent mode decomposition \cite{Glass2017}. We recently discussed the interest of studying the system in one dimension, and demonstrated the possibility of performing coherent-mode decomposition \cite{multioptics}  using fewer computer resources. We decided to first use this 1D method to study the system in the vertical direction. 
+The complexity of modelling accurately and realistically a synchrotron system resides in the fact that the beam is partially coherent. Completely incoherent beams can be simulated using ray tracing, and fully coherent beams with wavefront propagation. Partial coherence uses wavefront simulations, but considering multiple wavefronts. Two methods are used: multielectron Monte Carlo simulation \cite{codeSRW_ME} and coherent mode decomposition \cite{Glass2017}. We recently discussed the interest of studying the system in one dimension and demonstrated the possibility of performing coherent-mode decomposition \cite{multioptics}  using fewer computer resources. We decided to first use this 1D method to study the system in the vertical direction. 
 The intensity distribution of the refracted beam recorded at $N_P$ different propagation positions (downstream from the lens) in an interval around the focal length $f\pm\Delta d$, which for the single-lens CRL is \SI{3.592}{\meter}$\pm$\SI{0.5}{\meter}, and for the multi-lens CRL is \SI{0.359}{\meter}$\pm$\SI{0.05}{\meter}.
 The CRL is simulated by applying the the thin element approximation \inred{[\cite{Celestre2020, multioptics}]}, using the cumulated profile of the CRL (adding one or 10 parabolic profiles, for the single-lens CRL and the multi-lens CRL, respectively) plus the error profile (that considers the cumulated error of all lens interfaces).
 The Oasys \cite{codeOASYS} simulation workflow is shown in Fig.~\ref{fig:oasys}. 
 
 \begin{figure}\label{fig:oasys}
-    \includegraphics[width=0.99\textwidth]{figures/oasys.png}
+    \includegraphics[width=0.99\textwidth]{figures/figure1.png}
     \caption{OASYS workspace containing a flowchart with a single beamline simulation. 
     }
 \end{figure}
 
 \subsubsection{Sampling error profiles}
 In a simulation, a thin layer of the lens material (Be) with a given profile is added to the parabolic profile of the lens. Lens refraction is simulated using the thin object approximation \inred{[see, e.g. \cite{Celestre2020, multioptics}]}. Our main objective is to retrieve this profile from the refracted beam intensities. \inred{In the thin element approximation, the error profile in projection approximation $\Delta_z$ is directly proportional to the phase $\phi$ it impinges on the wavefront: $\phi = - \frac{2\pi}{\lambda} \delta \Delta_z$, where $\lambda$ is the wavelength and $\delta$ is the index of refraction decrement as in $n=1-\delta$. Hence, obtaining the error profile from intensity measurements can be seen as a way of addressing the phase problem \cite{Taylor1981, Klibanov1995}.}
-
 To do that, we will train a CNN, but for that, we need a large collection of lens error profiles. We describe here how to parametrize and sample the error profiles to have realistic sampled data. In terms of machine learning [see, e.g. \cite{chollet_book}], this is part of the feature engineering, a process of using your knowledge about the data and the CNN to make the algorithm work better by applying hardcoded (non-learned) transformations to the data before it goes into the model.
 Our experience measuring and analyzing 2D lens profiles indicated that although their topography looks complex, they can be fitted with great accuracy using the Zernike polynomials \inred{- see comparisons in Figs. 5 to 8 in \cite{Celestre2020}}. In practical terms, it allows expressing our 2D mesh data by only a few Zernike coefficients applied to the polynomial basis (the Zernike polynomials). There are other benefits when using Zernike polynomials: they have some physical meaning, as most of them are associated with a usual aberration (e.g. spherical aberration, coma, etc); and they are orthonormal, thus facilitating the expansion of any profile by just projecting onto the bases \inred{\cite{Mahajan2011}}. In this expansion, the coefficients are non-correlated. Zernike coefficients are often used in deep learning experiments in optics to parametrize the aberrations, typically for wavefront sensing [e.g. \cite{Saha2020}] or in the alignment of the optics [e.g. with Kirkpatrick-Baez mirrors in \cite{Luiz2022}]. 
 
@@ -214,7 +212,7 @@ The design and optimization of a deep learning system is more an art than a scie
 \subsection{Results for a CRL made of 10 lenses}
  This case implements 10 lenses, with a shorter $f$. The accuracy of the training and validation data is shown in 
  Fig~\ref{fig:v12v13}c.
- It can be noticed a much worse accuracy (\inred{73 \%}) as compared with the case of a single lens (\inred{93 \%}). The number of samples has been raised to $N_s$=10000. The reason of the worse training is due to the higher absorption of the CRL in the multi-lens CRL case: the cumulated absorption over the 10 lenses reduces significantly the tails of the intensity distribution to almost zero, thus the system does not respond to changes in the error profile in this zone. This will be further discussed in the next section.
+ It can be noticed a much worse accuracy (\inred{73 \%}) as compared with the case of a single lens (\inred{93 \%}). The number of samples has been raised to $N_s$=10000. The reason for the worse training is due to the higher absorption of the CRL in the multi-lens CRL case: the cumulated absorption over the 10 lenses reduces significantly the tails of the intensity distribution to almost zero, thus the system does not respond to changes in the error profile in this zone. This will be further discussed in the next section.
 
 %-------------------------------------------------------------------------
 %-------------------------------------------------------------------------
@@ -223,7 +221,7 @@ The design and optimization of a deep learning system is more an art than a scie
 We analyze here the influence of several parameters, concerning the learning procedure and also the influence of some physical aspects, like the use of a partially coherent beam.
 
 %-------------------------------------------------------------------------
-\subsection{Use of orthornormal basis.} The question is whether the use of an orthonormal basis for expressing the target coefficients is important. We tested the system using as targets in the training procedure the Zernike 1D coefficients instead of the Gram-Schmidt ones. As expected, the results are not so good: although 
+\subsection{Use of orthonormal basis.} The question is whether the use of an orthonormal basis for expressing the target coefficients is important. We tested the system using as targets in the training procedure the Zernike 1D coefficients instead of the Gram-Schmidt ones. As expected, the results are not so good: although 
 accuracy is only two points below (91\% instead of 93\%), the predicted profiles agree visually less well to the true profiles is worse (Fig.~\ref{fig:v14profiles}). However, a system using decomposition in non-orthogonal coefficients also well. 
 
 
@@ -231,9 +229,9 @@ accuracy is only two points below (91\% instead of 93\%), the predicted profiles
 % v13 and v14
     \includegraphics[width=0.75\textwidth]{figures/figure4.pdf}
     \caption{Some original and fitted (predicted) profiles from samples in the test data.
-    a) (left column): Standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases;
-    b) The same model trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles.
-    \inred{In blue the original profile. In orange the standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases. In green the same model trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles. Each profile has been shifted vertically for clarity, and the corresponding horizontal shifted axis is displayed.
+    % a) (left column): Standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases;
+    % b) The same model trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles.
+    \inred{In blue the original profile. In orange the standard model $N_S$=5000 (accuracy on test  data 93\%) using Gram-Schmidt bases. In green the same model was trained with targets using  non-orthogonal 1D Zernike bases (accuracy on test  data 91\%). Note that although the difference in accuracy is only 2\%, there are appreciable differences in the profiles. Each profile has been shifted vertically for clarity, and the corresponding horizontal shifted axis is displayed.
     }
     }
 \end{figure}
@@ -258,7 +256,7 @@ Therefore, the use of a partially coherent beam (instead of a fully coherent bea
  
 \begin{figure}\label{fig:multimode}
 % testing_multimode_v23
-    \includegraphics[width=0.8\textwidth]{figures/figure5.png}
+    \includegraphics[width=0.8\textwidth]{figures/figure5.pdf}
     \caption{Accuracy of the training data and validation data, for partial coherence calculations top) $N_S$=5000 64 planes downstream from focus, 25000 epochs;
     b) the same zoomed to observe the crossing point around 10000 epochs.
     }
@@ -269,15 +267,13 @@ Therefore, the use of a partially coherent beam (instead of a fully coherent bea
 % testing_multimode_v23  profiles 101-105
 \includegraphics[width=0.75\textwidth]{figures/figure6.pdf}
 \caption{
-Some original and fitted (predicted) profiles from samples in the test data. We used here multimode partial coherence. \inred{In blue the original profile. In orange the predicted profiles using 1500 epochs (
-accuracy on test data 92.3\%). In green the predicted profiles using 24000 epochs (
-accuracy on test data 96.7\%). Each profile has been shifted vertically for clarity, and the corresponding horizontal shifted axis is displayed.
+Some original and fitted (predicted) profiles from samples in the test data. We used here multimode partial coherence. \inred{In blue the original profile. In orange the predicted profiles using 1500 epochs (accuracy on test data 92.3\%). In green the predicted profiles using 24000 epochs (accuracy on test data 96.7\%). Each profile has been shifted vertically for clarity, and the corresponding horizontal shifted axis is displayed.
     }}
 \end{figure}
 
 %-------------------------------------------------------------------------
 \subsection{Effect the abscissas interval used the errors}
-The learning process for the CRL with 10 lenses is worse (see Fig.~\ref{fig:v12v13}c) than for the single lens (Fig.~\ref{fig:v12v13}b). This is related to the illuminated area. Indeed, the larger absorption of the 10 lenses makes that the illumination just after the CRL is smaller for the multi-lens CRL as compared to the single-lens CRL. Obviously, the CNN cannot predict the correct profile in a zone that is not illuminated, because the propagated intensity profiles have no changes if the error profile changes only in the dark side. To test this, we adjusted the abscissas interval of the generated random profiles to better match the illuminated area. As expected, we obtained better results (see Fig.\ref{fig:v26profiles}).
+The learning process for the CRL with 10 lenses is worse (see Fig.~\ref{fig:v12v13}c) than for the single lens (Fig.~\ref{fig:v12v13}b). This is related to the illuminated area. Indeed, the larger absorption of the 10 lenses means the illumination just after the CRL is smaller for the multi-lens CRL as compared to the single-lens CRL. Obviously, the CNN cannot predict the correct profile in a zone that is not illuminated, because the propagated intensity profiles have no changes if the error profile changes only in the dark side. To test this, we adjusted the abscissas interval of the generated random profiles to better match the illuminated area. As expected, we obtained better results (see Fig.\ref{fig:v26profiles}).
 
 \begin{figure}\label{fig:v26profiles}
 % v25 and v26
@@ -296,17 +292,17 @@ accuracy on test data 84.7\%.
 
 %-------------------------------------------------------------------------
 \subsection{Zernike coefficients from full random recipe}
-The algorithm used samples the coefficients for the different Zernike polynomials using a phenomenological model resulting from the analyses of experimental error profiles made in previous works. We tested this model against the full random model (all  coefficients are created using a random uniform distribution in [0,\SI{5}{\micro\meter}]). The algorithm based on the phenomenological recipe works better (\inred{72.6 \%} accuracy) than a fully random generation of the coefficients from uniform distributions (\inred{56.2 \%} accuracy). This is because in our model there is in some way coded the effect of the illumination profile on the CRL. This is true for the \SI{1500}{\micro\meter} window where, as discussed before, includes non-illuminated areas. If we reduce the window, both algorithms produce similar results. 
+The algorithm samples the coefficients for the different Zernike polynomials using a phenomenological model resulting from the analyses of experimental error profiles made in previous works. We tested this model against the full random model (all  coefficients are created using a random uniform distribution in [0,\SI{5}{\micro\meter}]). The algorithm based on the phenomenological recipe works better (\inred{72.6 \%} accuracy) than a fully random generation of the coefficients from uniform distributions (\inred{56.2 \%} accuracy). This is because in our model there is in some way coded the effect of the illumination profile on the CRL. This is true for the \SI{1500}{\micro\meter} window which, as discussed before, includes non-illuminated areas. If we reduce the window, both algorithms produce similar results. 
 
 %-------------------------------------------------------------------------
 \subsection{Effect of inaccuracies in error profiles on the propagated images.}
-We have always measured the accuracy of the CNN by comparing the \inred{estimated} error profile with the true error profile. Even when the accuracy is not excellent, for example in Fig. \ref{fig:v26profiles}a, the guessed profile usually separates from the true profile only at the edges. In these areas the transmitted intensity is low and therefore the effect of this discrepancy is small in the propagated intensity profiles. To illustrate this phenomenon, we compared the propagated wavefronts using the true error profile and the \inred{estimated} error profile for sample 103 in \ref{fig:v26profiles}. The results show a very similar intensity distributions (Fig. \ref{fig:figure8}).
+We have always measured the accuracy of the CNN by comparing the \inred{estimated} error profile with the true error profile. Even when the accuracy is not excellent, for example in Fig. \ref{fig:v26profiles}a, the guessed profile usually separates from the true profile only at the edges. In these areas the transmitted intensity is low and therefore the effect of this discrepancy is small in the propagated intensity profiles. To illustrate this phenomenon, we compared the propagated wavefronts using the true error profile and the \inred{estimated} error profile for sample 103 in \ref{fig:v26profiles}. The results show a very similar intensity distribution (Fig. \ref{fig:figure8}).
 
 \begin{figure}\label{fig:figure8}
 \includegraphics[width=0.85\textwidth]{figures/figure8.png}
 
 \caption{
-Intensity distributions for the multi-lens CRL at the central plane of the propagation interval for the profile 103 in Fig.~\ref{fig:v26profiles}. The three distributions refer to the true sampled profile, the guessed profile when a window of $\SI{1500}{\micro\meter}$, and the guessed profile when a window of $\SI{800}{\micro\meter}$. We only observe  minimum differences in the intensity distributions.
+Intensity distributions for the multi-lens CRL at the central plane of the propagation interval for the \inred{middle} profile in Fig.~\ref{fig:v26profiles}. The three distributions refer to the true sampled profile, the guessed profile when a window of $\SI{1500}{\micro\meter}$, and the guessed profile when a window of $\SI{800}{\micro\meter}$. We only observe  minimum differences in the intensity distributions.
     }
 \end{figure}
 
@@ -338,10 +334,11 @@ The usefulness of the CNN trained with synthetic data and being fed with  experi
 \ack{\textbf{Data availability}}
 % -----------------------------------------------------------------
 
-Data underlying the results presented in this paper are publicly available at (accessed: 16/05/2024):
-\begin{center}
+Data underlying the results presented in this paper are publicly available at \newline
+% (accessed: 16/05/2024):
+% \begin{center}
 \small{\texttt{https://github.com/oasys-esrf-kit/Paper\_JSR\_zt5005}}
-\end{center}
+% \end{center}
 
 % -----------------------------------------------------------------
 
