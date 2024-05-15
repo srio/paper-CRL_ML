@@ -158,7 +158,7 @@ Our experience measuring and analyzing 2D lens profiles indicated that although 
 
 Error profile samples are \inred{created by} defining a set of Zernike coefficients with random values. In our case, using Noll notation \cite{Noll:76}, we consider the first 15 polynomials excluding the four first ones (piston, tip, tip and defocus) but adding the secondary and \inred{tertiary} spherical aberrations (Noll numbers 22 and 37). In our case, for 1D simulations in the vertical plane, we are not interested in those with azimuthal dependency, thus ending with 7 polynomials\footnote{in fact, polynomial 12 has been removed as it looks to be easily represented by the others (in the Gram-Schmidt process this was reproduced with a lot of noise). } [6, 8, 10, 11, 14, 22, 37] - \inred{these include astigmatism, trefoil, coma, quadrafoil and primary spherical aberrations}. For each one, a random coefficient should be created. Instead of applying uniform sampling for all of them in the same interval [as done in \cite{Saha2020}], we prefer to customize the ranges and distributions for using empirical experience. We thus sample coefficients using the distributions [n, n, n, u, n, u, u]  (n=normal, u=uniform) and intervals [$\sigma$=0.5, $\sigma$=0.5, $\sigma$=0.5, $\pm$2.3, $\sigma$=0.05, $\pm$1.0, $\pm$0.5] $\times F$ microns, with a factor $F=5$. We sampled $N_P$ 2D mesh surfaces and wrote the vertical profile in a file, to be used in our wavefront simulations.
 
-The Zernike coefficients are orthonormal on a domain that is a disk of radius unity. If we limit the domain to another shape (e.g. rectangle), or, in our case, we reduce the dimensionality (1D vertical cuts), the Zernike polynomials do not anymore constitute an orthonormal set of polynomials. To solve this inconvenience, to inject into the CNN a consistent input, we orthogonalized our base of 1D cuts of Zernike polynomials using the Gram-Schmidt method, to obtain a new orthonormal 1D basis. Therefore, the coefficients to be passed to the CNN are those of Gram-Schmidt base, and not those of the 1D Zernike cuts. This does not change the sampled error profiles used in the wavefront simulations, but changes the target values used to train and test the CNN.  
+The Zernike coefficients are orthonormal on a domain that is a disk of radius unity. If we limit the domain to another shape (e.g. rectangle), or, in our case, we reduce the dimensionality (1D vertical cuts), the Zernike polynomials no longer form an orthonormal set of polynomials. To solve this inconvenience, to inject into the CNN a consistent input, we orthogonalized our base of 1D cuts of Zernike polynomials using the Gram-Schmidt method, to obtain a new orthonormal 1D basis. Therefore, the coefficients to be passed to the CNN are those of Gram-Schmidt base, and not those of the 1D Zernike cuts. This does not change the sampled error profiles used in the wavefront simulations, but changes the target values used to train and test the CNN.  
 
 \subsection{Deep learning system}
 
@@ -257,8 +257,7 @@ Therefore, the use of a partially coherent beam (instead of a fully coherent bea
 \begin{figure}\label{fig:multimode_accuracy}
 % testing_multimode_v23
     \includegraphics[width=0.8\textwidth]{figures/figure5.pdf}
-    \caption{Accuracy of the training data and validation data, for partial coherence calculations top) $N_S$=5000 64 planes downstream from focus, 25000 epochs;
-    b) the same zoomed to observe the crossing point around 10000 epochs.
+    \caption{Accuracy of the training data and validation data, for partial coherence calculations \inred{using} $N_S$=5000, 64 planes downstream from focus, 25000 epochs. \inred{The inset shows} the crossing point around 10000 epochs.
     }
 \end{figure}
 
